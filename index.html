@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victor Rubia - Développeur Full Stack</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#08080F">
+</head>
+<body>
+  <!-- Terminal Header -->
+  <header class="terminal-header">
+    <div class="terminal-tabs">
+      <div class="tab tab-active">
+        <span class="tab-icon">●</span>
+        <span class="tab-title">portfolio.tsx</span>
+      </div>
+    </div>
+    <div class="terminal-prompt">
+      <span class="prompt-user">victor@dev</span>
+      <span class="prompt-separator">:</span>
+      <span class="prompt-path">~/projects</span>
+      <span class="prompt-symbol">$</span>
+      <span class="prompt-command">ls --all</span>
+      <span class="cursor">_</span>
+    </div>
+  </header>
+
+  <!-- Main Layout - VS Code Style -->
+  <div class="vscode-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-title">EXPLORER</span>
+      </div>
+      <nav class="file-tree">
+        <div class="tree-folder tree-folder-open">
+          <span class="folder-icon">📁</span>
+          <span class="folder-name">portfolio</span>
+        </div>
+        <div class="tree-items">
+          <a href="#about" class="tree-file">
+            <span class="file-icon">📄</span>
+            <span class="file-name">about.md</span>
+          </a>
+          <a href="#projects" class="tree-file tree-file-active">
+            <span class="file-icon">⚛️</span>
+            <span class="file-name">projects.tsx</span>
+          </a>
+          <a href="#stack" class="tree-file">
+            <span class="file-icon">📦</span>
+            <span class="file-name">stack.json</span>
+          </a>
+          <a href="#contact" class="tree-file">
+            <span class="file-icon">✉️</span>
+            <span class="file-name">contact.ts</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Stack Badges -->
+      <div class="sidebar-section">
+        <div class="section-title">STACK</div>
+        <div class="stack-badges">
+          <span class="badge badge-react">React</span>
+          <span class="badge badge-next">Next.js</span>
+          <span class="badge badge-ts">TypeScript</span>
+          <span class="badge badge-django">Django</span>
+          <span class="badge badge-python">Python</span>
+          <span class="badge badge-node">Node.js</span>
+          <span class="badge badge-tailwind">Tailwind</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="editor-content">
+      <!-- About Section -->
+      <section id="about" class="code-section">
+        <div class="code-header reveal">
+          <span class="line-number">1</span>
+          <span class="code-comment">// À propos</span>
+        </div>
+        <div class="about-content">
+          <h1 class="name-title">
+            <span class="keyword">const</span>
+            <span class="variable">developer</span>
+            <span class="operator">=</span>
+            <span class="string">"Victor Rubia"</span>
+          </h1>
+          <p class="bio reveal reveal-delay-1">
+            <span class="code-comment">// Développeur Full Stack Junior</span><br>
+            <span class="code-comment">// React/Next.js · Django/Python · TypeScript</span>
+          </p>
+          <div class="quick-links reveal reveal-delay-2">
+            <a href="https://github.com/Victor-R-R" target="_blank" class="link-button" aria-label="GitHub">
+              <svg class="link-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <a href="mailto:victor@example.com" class="link-button" aria-label="Contact">
+              <svg class="link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <span>Contact</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="code-section">
+        <div class="code-header reveal">
+          <span class="line-number">12</span>
+          <span class="code-comment">// Projets</span>
+        </div>
+        <div class="projects-grid" id="projectsGrid">
+          <!-- Projects loaded via JS -->
+        </div>
+      </section>
+
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <div class="status-left">
+          <span class="status-item">
+            <span class="status-icon">⚡</span>
+            <span id="projectCount">0</span> projets
+          </span>
+          <span class="status-item">
+            <span class="status-icon">📦</span>
+            7 technologies
+          </span>
+        </div>
+        <div class="status-right">
+          <span class="status-item">UTF-8</span>
+          <span class="status-item">TypeScript</span>
+          <span class="status-item">Ln 1, Col 1</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="terminal-footer">
+    <div class="footer-content">
+      <span class="footer-text">
+        <span class="prompt-symbol">$</span>
+        git commit -m "Portfolio 2026"
+      </span>
+      <span class="footer-links">
+        <a href="https://github.com/Victor-R-R" target="_blank">GitHub</a>
+        <span class="separator">·</span>
+        <a href="mailto:victor@example.com">Email</a>
+      </span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
