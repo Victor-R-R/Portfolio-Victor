@@ -489,6 +489,20 @@ body::after {
 
 .link-icon { font-size: 16px; position: relative; z-index: 1; }
 
+.link-button-download {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.link-button-download:hover {
+  border-color: #10b981;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+}
+
+.link-button-download::before {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
 /* ─── Typing Animation ───────────────────────────────── */
 .typing-cursor::after {
   content: '|';
