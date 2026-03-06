@@ -6,7 +6,7 @@ const projects = [
     description: "Application de gestion d'appels pour internat. Interface moderne avec React/Next.js et backend Django. Gestion des utilisateurs, planification et notifications en temps réel.",
     type: "Full Stack",
     github: "https://github.com/Victor-R-R/appel-internat",
-    demo: null,
+    demo: "https://appel-internat.vercel.app",
     tech: ["React", "Next.js", "Django", "Python", "TypeScript", "Tailwind CSS"]
   },
   {
