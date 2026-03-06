@@ -181,31 +181,6 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// ─── Contact Modal ────────────────────────────────────────
-function openContactModal() {
-  const modal = document.getElementById('contactModal');
-  if (!modal) return;
-  modal.classList.add('modal-open');
-  modal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeContactModal() {
-  const modal = document.getElementById('contactModal');
-  if (!modal) return;
-  modal.classList.remove('modal-open');
-  modal.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-}
-
-function handleModalOverlayClick(e) {
-  if (e.target === e.currentTarget) closeContactModal();
-}
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeContactModal();
-});
-
 // ─── Initialize ───────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   updateProjectCount();
