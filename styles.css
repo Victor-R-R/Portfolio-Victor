@@ -805,6 +805,120 @@ body::after {
   }
 }
 
+/* ─── Contact Modal ──────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 8, 15, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease;
+}
+
+.modal-overlay.modal-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-card {
+  background: rgba(14, 14, 26, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(124,58,237,0.3);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 480px;
+  margin: var(--space-lg);
+  box-shadow: var(--glow-card), 0 24px 64px rgba(0,0,0,0.6);
+  transform: translateY(16px) scale(0.97);
+  transition: transform 250ms ease;
+}
+
+.modal-overlay.modal-open .modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-xl);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.modal-title {
+  font-size: 13px;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 200ms ease;
+  font-family: var(--font-mono);
+  line-height: 1;
+}
+
+.modal-close:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.07);
+}
+
+.modal-body {
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  font-size: 14px;
+  font-family: var(--font-mono);
+}
+
+.contact-key {
+  color: var(--syntax-keyword);
+  min-width: 120px;
+  font-weight: 500;
+}
+
+.contact-sep {
+  color: var(--text-muted);
+}
+
+.contact-value {
+  color: var(--syntax-string);
+}
+
+.contact-link {
+  text-decoration: none;
+  transition: all 200ms ease;
+}
+
+.contact-link:hover {
+  color: var(--neon-cyan);
+  filter: drop-shadow(0 0 8px rgba(6,182,212,0.5));
+  text-decoration: underline;
+}
+
+.contact-available {
+  color: var(--neon-green);
+  filter: drop-shadow(0 0 8px rgba(16,185,129,0.4));
+}
+
 /* ─── Reduced Motion ─────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

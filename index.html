@@ -102,13 +102,13 @@
               </svg>
               <span>GitHub</span>
             </a>
-            <a href="mailto:victor@example.com" class="link-button" aria-label="Contact">
+            <button id="contactBtn" class="link-button" aria-label="Contact" onclick="openContactModal()">
               <svg class="link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                 <polyline points="22,6 12,13 2,6"/>
               </svg>
               <span>Contact</span>
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -159,6 +159,40 @@
       </span>
     </div>
   </footer>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="modal-overlay" aria-hidden="true" onclick="handleModalOverlayClick(event)">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Coordonnées de contact">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span class="code-comment">// contact.ts</span>
+        </div>
+        <button class="modal-close" onclick="closeContactModal()" aria-label="Fermer">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="contact-row">
+          <span class="contact-key">email</span>
+          <span class="contact-sep">:</span>
+          <a href="mailto:victor.r.r90@gmail.com" class="contact-value contact-link">victor.r.r90@gmail.com</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-key">github</span>
+          <span class="contact-sep">:</span>
+          <a href="https://github.com/Victor-R-R" target="_blank" rel="noopener noreferrer" class="contact-value contact-link">github.com/Victor-R-R</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-key">localisation</span>
+          <span class="contact-sep">:</span>
+          <span class="contact-value">France</span>
+        </div>
+        <div class="contact-row">
+          <span class="contact-key">disponibilité</span>
+          <span class="contact-sep">:</span>
+          <span class="contact-value contact-available">Ouvert aux opportunités</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
