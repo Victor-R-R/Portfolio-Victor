@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(open:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(cp:*)",
+      "Bash(git checkout:*)",
+      "Bash(git commit:*)",
+      "Bash(git:*)"
     ]
   }
 }
