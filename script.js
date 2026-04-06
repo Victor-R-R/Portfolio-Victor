@@ -24,7 +24,7 @@ const projects = [
     description: "Application web de gestion des listes de chargement pour entreprises BTP. Génération de 3 documents imprimables (bon de transport, fiche de chargement, bon de suivi), checklist mobile pour chauffeurs (sans auth), et module de statistiques de consommation par chantier.",
     type: "Full Stack",
     github: "https://github.com/Victor-R-R/Camio",
-    demo: null,
+    demo: "https://camio-xi.vercel.app/login",
     tech: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Tailwind CSS", "shadcn/ui", "NextAuth"]
   },
   {
