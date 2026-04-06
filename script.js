@@ -20,6 +20,15 @@ const projects = [
   },
   {
     id: 3,
+    title: "Camio",
+    description: "Application web de gestion des listes de chargement pour entreprises BTP. Génération de 3 documents imprimables (bon de transport, fiche de chargement, bon de suivi), checklist mobile pour chauffeurs (sans auth), et module de statistiques de consommation par chantier.",
+    type: "Full Stack",
+    github: "https://github.com/Victor-R-R/Camio",
+    demo: null,
+    tech: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Tailwind CSS", "shadcn/ui", "NextAuth"]
+  },
+  {
+    id: 4,
     title: "Portfolio Web",
     description: "Portfolio personnel avec design VS Code theme. HTML/CSS/JS vanilla avec architecture modulaire. Responsive et optimisé pour les performances.",
     type: "Frontend",
