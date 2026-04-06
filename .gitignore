@@ -1,4 +1,6 @@
 node_modules/
 dist/
-*.pdf
+# PDFs du portfolio trackés intentionnellement
 .env
+.vercel
+.env*.local
