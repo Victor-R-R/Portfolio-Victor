@@ -29,6 +29,15 @@ const projects = [
   },
   {
     id: 4,
+    title: "TeachIA",
+    description: "Plateforme de préparation au CAPES d'espagnol avec professeur IA disponible 24h/24. Exercices interactifs (QCM, vrai/faux, lacunes), génération d'exercices par IA, chat streamé avec historique persistant, et base de 82 exercices structurés couvrant grammaire, civilisation, didactique et traduction.",
+    type: "Full Stack",
+    github: "https://github.com/Victor-R-R/teachIA",
+    demo: "https://teach-ia.vercel.app",
+    tech: ["Next.js", "TypeScript", "AI SDK", "Claude", "Neon", "PostgreSQL", "shadcn/ui", "Tailwind CSS"]
+  },
+  {
+    id: 5,
     title: "Portfolio Web",
     description: "Portfolio personnel avec design VS Code theme. HTML/CSS/JS vanilla avec architecture modulaire. Responsive et optimisé pour les performances.",
     type: "Frontend",
