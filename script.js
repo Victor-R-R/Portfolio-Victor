@@ -44,6 +44,24 @@ const projects = [
     github: "#",
     demo: "#",
     tech: ["HTML", "CSS", "JavaScript", "Responsive Design"]
+  },
+  {
+    id: 6,
+    title: "Brotia",
+    description: "Plateforme de gestion de serres pour agriculteurs modernes. Suivi des cultures et récoltes, météo en temps réel par serre, alertes climatiques automatiques (gel, vent, grêle), assistant IA agronomique spécialisé avec upload d'images, et app mobile Expo. Architecture monorepo Turborepo avec dashboard Next.js et companion mobile.",
+    type: "Full Stack",
+    github: "https://github.com/Victor-R-R/Brotia",
+    demo: "https://brotia.vercel.app",
+    tech: ["Next.js", "Expo", "React Native", "TypeScript", "Prisma", "PostgreSQL", "MapLibre GL", "Turborepo", "Claude AI", "Tailwind CSS"]
+  },
+  {
+    id: 7,
+    title: "LinkedAgents",
+    description: "Suite de 6 agents Claude Code spécialisés + 1 orchestrateur pour gérer sa présence LinkedIn via IA. Création et publication de posts, recherche et scoring d'offres d'emploi, rédaction d'articles, curation de contenu tendance, design de visuels, et audit de profil — tout en une seule installation.",
+    type: "AI / Agents",
+    github: "https://github.com/Victor-R-R/LinkedAgents",
+    demo: null,
+    tech: ["Claude Code", "Shell", "LinkedIn API", "Python"]
   }
 ];
 
@@ -107,9 +125,10 @@ function renderProjects() {
 
   // Type badge colors by project type
   const typeColors = {
-    'Full Stack': { bg: 'rgba(124,58,237,0.15)', border: 'rgba(124,58,237,0.3)', color: '#A78BFA' },
-    'Backend':    { bg: 'rgba(16,185,129,0.12)', border: 'rgba(16,185,129,0.25)', color: '#34D399' },
-    'Frontend':   { bg: 'rgba(6,182,212,0.12)',  border: 'rgba(6,182,212,0.25)',  color: '#22D3EE' },
+    'Full Stack':  { bg: 'rgba(124,58,237,0.15)', border: 'rgba(124,58,237,0.3)', color: '#A78BFA' },
+    'Backend':     { bg: 'rgba(16,185,129,0.12)', border: 'rgba(16,185,129,0.25)', color: '#34D399' },
+    'Frontend':    { bg: 'rgba(6,182,212,0.12)',  border: 'rgba(6,182,212,0.25)',  color: '#22D3EE' },
+    'AI / Agents': { bg: 'rgba(251,146,60,0.12)', border: 'rgba(251,146,60,0.25)', color: '#FB923C' },
   };
 
   grid.innerHTML = projects.map((project, index) => {
