@@ -218,11 +218,28 @@ window.addEventListener('scroll', () => {
   }
 });
 
+// ─── Theme Toggle ─────────────────────────────────────────
+function initThemeToggle() {
+  const btn = document.getElementById('themeToggle');
+  const meta = document.getElementById('metaThemeColor');
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    document.documentElement.classList.add('theme-transition');
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    if (meta) meta.content = next === 'light' ? '#F8F8F8' : '#08080F';
+    setTimeout(() => document.documentElement.classList.remove('theme-transition'), 300);
+  });
+}
+
 // ─── Initialize ───────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   updateProjectCount();
   renderProjects();
   initScrollReveal();
+  initThemeToggle();
 
   // Add reveal classes to about section
   const aboutContent = document.querySelector('.about-content');
