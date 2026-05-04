@@ -30,7 +30,7 @@
       --border-2:     rgba(255,255,255,0.14);
       --text:         #FAFAFA;
       --text-2:       #A1A1AA;
-      --text-3:       #52525B;
+      --text-3:       #7B7B88;
       --amber:        #F59E0B;
       --amber-dim:    rgba(245,158,11,0.10);
       --amber-border: rgba(245,158,11,0.22);
@@ -66,6 +66,15 @@
         border-color 200ms ease,
         box-shadow 200ms ease !important;
       transition-delay: 0ms !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html.theme-transition,
+      html.theme-transition *,
+      html.theme-transition *::before,
+      html.theme-transition *::after {
+        transition: none !important;
+      }
     }
 
     html { scroll-behavior: smooth; }
@@ -683,7 +692,7 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-right">
-      <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">
+      <button class="theme-toggle" id="themeToggle" aria-label="Passer en mode clair" aria-pressed="false">
         <!-- Sun -->
         <svg class="theme-icon icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="4"/>
@@ -754,7 +763,7 @@
     </section>
 
     <!-- About -->
-    <section class="section">
+    <section id="about" class="section">
       <p class="section-label">À propos</p>
       <div class="about-grid">
         <div class="about-text">
@@ -1002,13 +1011,24 @@
     const btn  = document.getElementById('themeToggle');
     const meta = document.getElementById('metaTheme');
 
+    const syncAriaState = (theme) => {
+      const isLight = theme === 'light';
+      btn.setAttribute('aria-pressed', isLight ? 'true' : 'false');
+      btn.setAttribute('aria-label', isLight ? 'Passer en mode sombre' : 'Passer en mode clair');
+    };
+
+    syncAriaState(document.documentElement.getAttribute('data-theme') || 'dark');
+
+    let _themeTimer;
     btn.addEventListener('click', () => {
+      clearTimeout(_themeTimer);
       document.documentElement.classList.add('theme-transition');
       const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
       if (meta) meta.content = next === 'light' ? '#F9F6F1' : '#0A0A0A';
-      setTimeout(() => document.documentElement.classList.remove('theme-transition'), 300);
+      syncAriaState(next);
+      _themeTimer = setTimeout(() => document.documentElement.classList.remove('theme-transition'), 300);
     });
   </script>
 
