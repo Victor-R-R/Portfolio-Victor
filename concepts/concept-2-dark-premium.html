@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victor Rubia — Concept 2: Dark Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:         #0A0A0A;
+      --surface:    #111111;
+      --surface-2:  #1A1A1A;
+      --border:     rgba(255,255,255,0.08);
+      --border-2:   rgba(255,255,255,0.12);
+      --text:       #FAFAFA;
+      --text-2:     #A1A1AA;
+      --text-3:     #52525B;
+      --amber:      #F59E0B;
+      --amber-dim:  rgba(245,158,11,0.12);
+      --amber-border: rgba(245,158,11,0.25);
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-sans:  'Geist', -apple-system, system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── Noise texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 56px;
+      background: rgba(10,10,10,0.7);
+      backdrop-filter: blur(20px) saturate(1.5);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-style: italic;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 200ms;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      background: var(--amber-dim);
+      border: 1px solid var(--amber-border);
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--amber);
+      text-decoration: none;
+      transition: all 200ms;
+    }
+
+    .nav-cta:hover {
+      background: rgba(245,158,11,0.2);
+      border-color: rgba(245,158,11,0.4);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 48px 80px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Subtle radial glow — NOT cyberpunk, just warmth */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(56px, 8vw, 96px);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--amber);
+    }
+
+    .hero-sub {
+      max-width: 480px;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-num {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -1px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Section ── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 96px 48px;
+      border-bottom: 1px solid var(--border);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 64px;
+    }
+
+    .section-num {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-3);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 36px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+
+    /* ── Project Cards ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .project-card {
+      background: var(--surface);
+      padding: 36px;
+      transition: background 250ms;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      color: inherit;
+    }
+
+    .project-card:hover { background: var(--surface-2); }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .card-badge {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid;
+    }
+
+    .badge-fs   { color: #818CF8; border-color: rgba(129,140,248,0.25); background: rgba(129,140,248,0.08); }
+    .badge-be   { color: #34D399; border-color: rgba(52,211,153,0.25);  background: rgba(52,211,153,0.08); }
+    .badge-fe   { color: #38BDF8; border-color: rgba(56,189,248,0.25);  background: rgba(56,189,248,0.08); }
+    .badge-ai   { color: var(--amber); border-color: var(--amber-border); background: var(--amber-dim); }
+
+    .card-link {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      color: var(--text-3);
+      text-decoration: none;
+      transition: all 200ms;
+    }
+
+    .project-card:hover .card-link {
+      border-color: var(--border-2);
+      color: var(--text-2);
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-2);
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    .card-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tech {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-3);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      padding: 3px 9px;
+      border-radius: 4px;
+      transition: all 200ms;
+    }
+
+    .project-card:hover .tech {
+      border-color: var(--border-2);
+      color: var(--text-2);
+    }
+
+    /* ── Stack ── */
+    .stack-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .stack-pill {
+      padding: 16px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 200ms;
+      cursor: default;
+    }
+
+    .stack-pill:hover {
+      background: var(--surface-2);
+      border-color: var(--border-2);
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot-react     { background: #61DAFB; }
+    .dot-next      { background: #FFFFFF; }
+    .dot-ts        { background: #3178C6; }
+    .dot-py        { background: #3776AB; }
+    .dot-django    { background: #092E20; border: 1px solid #44B78B; }
+    .dot-node      { background: #339933; }
+    .dot-pg        { background: #336791; }
+    .dot-tailwind  { background: #06B6D4; }
+
+    .pill-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-2);
+    }
+
+    /* ── Contact ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .contact-cell {
+      background: var(--surface);
+      padding: 32px;
+      transition: background 200ms;
+    }
+
+    .contact-cell:hover { background: var(--surface-2); }
+
+    .contact-cell-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 12px;
+    }
+
+    .contact-cell-value {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 200ms;
+    }
+
+    a.contact-cell-value:hover { color: var(--amber); }
+
+    /* ── Footer ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 28px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-left {
+      font-size: 13px;
+      color: var(--text-3);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 200ms;
+    }
+
+    .footer-links a:hover { color: var(--text-2); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      nav, section, footer { padding-left: 24px; padding-right: 24px; }
+      .hero { padding: 100px 24px 60px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .stack-list { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="nav-logo">Victor Rubia</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="mailto:victor.r.r90@gmail.com" class="nav-cta">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        Disponible
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero" style="max-width:1200px;margin:0 auto;">
+    <p class="hero-eyebrow">Développeur Full Stack</p>
+    <h1 class="hero-title">Victor<br><em>Rubia</em></h1>
+    <p class="hero-sub">
+      Je crée des applications web robustes et soignées — de la conception de l'API jusqu'à l'interface finale. React, Next.js, Django, Python.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">7</span>
+        <span class="stat-label">Projets</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">3+</span>
+        <span class="stat-label">Années</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">8</span>
+        <span class="stat-label">Technologies</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Projets -->
+  <section id="projets">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Travaux récents</h2>
+    </div>
+    <div class="projects-grid">
+
+      <a class="project-card" href="https://github.com/Victor-R-R/appel-internat" target="_blank" rel="noopener">
+        <div class="card-top">
+          <span class="card-badge badge-fs">Full Stack</span>
+          <span class="card-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+        </div>
+        <h3 class="card-title">Appel Internat</h3>
+        <p class="card-desc">Gestion d'appels scolaires. Interface React/Next.js, backend Django, notifications temps réel.</p>
+        <div class="card-tech">
+          <span class="tech">Next.js</span><span class="tech">Django</span><span class="tech">TypeScript</span><span class="tech">Tailwind</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://camio-xi.vercel.app" target="_blank" rel="noopener">
+        <div class="card-top">
+          <span class="card-badge badge-fs">Full Stack</span>
+          <span class="card-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+        </div>
+        <h3 class="card-title">Camio</h3>
+        <p class="card-desc">Gestion de chargement BTP. Documents imprimables, checklist mobile chauffeurs, statistiques chantier.</p>
+        <div class="card-tech">
+          <span class="tech">Next.js</span><span class="tech">Prisma</span><span class="tech">PostgreSQL</span><span class="tech">shadcn/ui</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://teach-ia.vercel.app" target="_blank" rel="noopener">
+        <div class="card-top">
+          <span class="card-badge badge-ai">AI</span>
+          <span class="card-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+        </div>
+        <h3 class="card-title">TeachIA</h3>
+        <p class="card-desc">Préparation au CAPES d'espagnol par IA. Exercices interactifs, génération dynamique, chat streamé.</p>
+        <div class="card-tech">
+          <span class="tech">AI SDK</span><span class="tech">Claude</span><span class="tech">Neon</span><span class="tech">Next.js</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://brotia.vercel.app" target="_blank" rel="noopener">
+        <div class="card-top">
+          <span class="card-badge badge-fs">Full Stack</span>
+          <span class="card-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+        </div>
+        <h3 class="card-title">Brotia</h3>
+        <p class="card-desc">Gestion de serres agricoles. Météo temps réel, alertes climatiques, assistant IA, app mobile Expo.</p>
+        <div class="card-tech">
+          <span class="tech">Next.js</span><span class="tech">Expo</span><span class="tech">Claude AI</span><span class="tech">Turborepo</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Stack -->
+  <section id="stack">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Technologies</h2>
+    </div>
+    <div class="stack-list">
+      <div class="stack-pill"><span class="pill-dot dot-react"></span><span class="pill-name">React</span></div>
+      <div class="stack-pill"><span class="pill-dot dot-next"></span><span class="pill-name">Next.js</span></div>
+      <div class="stack-pill"><span class="pill-dot dot-ts"></span><span class="pill-name">TypeScript</span></div>
+      <div class="stack-pill"><span class="pill-dot dot-py"></span><span class="pill-name">Python</span></div>
+      <div class="stack-pill"><span class="pill-dot dot-django"></span><span class="pill-name">Django</span></div>
+      <div class="stack-pill"><span class="pill-dot dot-node"></span><span class="pill-name">Node.js</span></div>
+      <div class="stack-pill"><span class="pill-dot dot-pg"></span><span class="pill-name">PostgreSQL</span></div>
+      <div class="stack-pill"><span class="pill-dot dot-tailwind"></span><span class="pill-name">Tailwind</span></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Me contacter</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-cell">
+        <p class="contact-cell-label">Email</p>
+        <a href="mailto:victor.r.r90@gmail.com" class="contact-cell-value">victor.r.r90@gmail.com</a>
+      </div>
+      <div class="contact-cell">
+        <p class="contact-cell-label">Téléphone</p>
+        <a href="tel:+330640300249" class="contact-cell-value">+33 6 40 30 02 49</a>
+      </div>
+      <div class="contact-cell">
+        <p class="contact-cell-label">GitHub</p>
+        <a href="https://github.com/Victor-R-R" target="_blank" rel="noopener" class="contact-cell-value">Victor-R-R</a>
+      </div>
+      <div class="contact-cell">
+        <p class="contact-cell-label">Disponibilité</p>
+        <span class="contact-cell-value" style="color: var(--amber);">Ouvert aux opportunités</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-left">© 2026 Victor Rubia Rodriguez</span>
+    <div class="footer-links">
+      <a href="https://github.com/Victor-R-R" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:victor.r.r90@gmail.com">Email</a>
+      <a href="/CV_Victor_Rubia_Rodriguez.pdf" download>CV</a>
+    </div>
+  </footer>
+
+</body>
+</html>

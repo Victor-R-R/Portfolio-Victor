@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victor Rubia — Concept 3: Éditorial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream:    #FAF8F5;
+      --cream-2:  #F0EDE8;
+      --ink:      #1A1816;
+      --ink-2:    #4A4540;
+      --ink-3:    #8A857E;
+      --rule:     #D8D3CC;
+      --red:      #E63329;
+      --font-disp: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Masthead ── */
+    .masthead {
+      padding: 24px 56px;
+      border-bottom: 3px solid var(--ink);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .masthead-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .masthead-nav {
+      display: flex;
+      list-style: none;
+      gap: 24px;
+    }
+
+    .masthead-nav a {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      text-decoration: none;
+      transition: color 200ms;
+    }
+
+    .masthead-nav a:hover { color: var(--red); }
+
+    .masthead-title {
+      font-family: var(--font-disp);
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: var(--ink);
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .masthead-right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .masthead-date {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--ink-3);
+      letter-spacing: 0.04em;
+    }
+
+    .masthead-available {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      background: var(--red);
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      text-decoration: none;
+    }
+
+    /* ── Issue header ── */
+    .issue-header {
+      padding: 8px 56px;
+      background: var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .issue-text {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .issue-text span { color: rgba(255,255,255,0.9); }
+
+    /* ── Hero Feature ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 520px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .hero-text {
+      padding: 72px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid var(--rule);
+    }
+
+    .hero-kicker {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-kicker::before {
+      content: '';
+      width: 28px;
+      height: 2px;
+      background: var(--red);
+    }
+
+    .hero-headline {
+      font-family: var(--font-disp);
+      font-size: clamp(44px, 5vw, 64px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--red);
+    }
+
+    .hero-dek {
+      font-size: 17px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--ink-2);
+      line-height: 1.6;
+      margin-bottom: 36px;
+      max-width: 420px;
+      border-left: 3px solid var(--rule);
+      padding-left: 16px;
+    }
+
+    .hero-byline {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+
+    .hero-visual {
+      background: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 2px,
+        rgba(255,255,255,0.02) 2px,
+        rgba(255,255,255,0.02) 4px
+      );
+    }
+
+    .code-block {
+      position: relative;
+      z-index: 1;
+      font-family: 'Courier New', monospace;
+      font-size: 15px;
+      line-height: 2;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .code-block .kw  { color: #A78BFA; }
+    .code-block .va  { color: #93C5FD; }
+    .code-block .st  { color: var(--red); }
+    .code-block .cm  { color: rgba(255,255,255,0.35); font-style: italic; }
+    .code-block .op  { color: rgba(255,255,255,0.6); }
+
+    /* ── Content grid ── */
+    .content-grid {
+      padding: 0 56px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .section-rule {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 24px 0 0;
+      margin-bottom: 40px;
+      border-top: 3px double var(--rule);
+    }
+
+    .rule-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      white-space: nowrap;
+    }
+
+    .rule-line {
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* ── Project articles ── */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    .article {
+      padding: 32px 28px 32px 0;
+      border-right: 1px solid var(--rule);
+    }
+
+    .article:last-child { border-right: none; padding-right: 0; }
+    .article:first-child { padding-left: 0; }
+    .article:not(:first-child) { padding-left: 28px; }
+
+    .article-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 10px;
+    }
+
+    .article-title {
+      font-family: var(--font-disp);
+      font-weight: 700;
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: -0.3px;
+      color: var(--ink);
+      margin-bottom: 10px;
+      transition: color 200ms;
+    }
+
+    .article:hover .article-title { color: var(--red); }
+
+    .article-title.large {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .article-excerpt {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink-2);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .article-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .tech-pill {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--ink-3);
+      border: 1px solid var(--rule);
+      padding: 2px 7px;
+      border-radius: 2px;
+      letter-spacing: 0.03em;
+    }
+
+    .article-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      margin-top: 14px;
+      transition: color 200ms;
+    }
+
+    .article-link:hover { color: var(--red); }
+
+    /* ── Stack strip ── */
+    .stack-strip {
+      padding: 40px 56px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .stack-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      background: var(--cream-2);
+      transition: all 200ms;
+      cursor: default;
+    }
+
+    .chip:hover {
+      border-color: var(--ink);
+      background: var(--cream);
+    }
+
+    .chip-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-2);
+    }
+
+    /* ── Contact columns ── */
+    .contact-strip {
+      padding: 56px;
+      display: grid;
+      grid-template-columns: 1fr 2px 1fr 2px 1fr;
+      gap: 0;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .contact-col {
+      padding: 0 40px;
+    }
+
+    .contact-col:first-child { padding-left: 0; }
+    .contact-col:last-child  { padding-right: 0; }
+
+    .col-divider {
+      background: var(--rule);
+    }
+
+    .contact-col-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .contact-col-value {
+      font-family: var(--font-disp);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      line-height: 1.3;
+      display: block;
+      transition: color 200ms;
+    }
+
+    a.contact-col-value:hover { color: var(--red); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 20px 56px;
+      background: var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-text {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 200ms;
+    }
+
+    .footer-links a:hover { color: rgba(255,255,255,0.9); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .masthead { grid-template-columns: 1fr; padding: 20px 24px; }
+      .masthead-left, .masthead-right { justify-content: flex-start; }
+      .masthead-title { text-align: left; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 280px; }
+      .content-grid { padding: 0 24px; }
+      .articles-grid { grid-template-columns: 1fr; }
+      .article { border-right: none; border-bottom: 1px solid var(--rule); padding: 28px 0; }
+      .stack-strip, .contact-strip, footer { padding-left: 24px; padding-right: 24px; }
+      .contact-strip { grid-template-columns: 1fr; gap: 24px; }
+      .col-divider { display: none; }
+      .contact-col { padding: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <div class="masthead-left">
+      <ul class="masthead-nav">
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <a href="#" class="masthead-title">Victor Rubia</a>
+    <div class="masthead-right">
+      <span class="masthead-date">France · 2026</span>
+      <a href="mailto:victor.r.r90@gmail.com" class="masthead-available">Disponible</a>
+    </div>
+  </header>
+
+  <!-- Issue bar -->
+  <div class="issue-header">
+    <span class="issue-text">Développeur <span>Full Stack</span> · React / Next.js · Django / Python</span>
+    <span class="issue-text"><span>7</span> projets · <span>8</span> technologies</span>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-text">
+      <p class="hero-kicker">Développeur Full Stack</p>
+      <h1 class="hero-headline">
+        Code propre.<br>
+        Produits <em>qui tiennent.</em>
+      </h1>
+      <p class="hero-dek">
+        Je construis des applications web complètes, de l'API jusqu'à l'interface finale — avec React, Next.js, Django et Python.
+      </p>
+      <p class="hero-byline">Victor Rubia Rodriguez · Junior Full Stack · Ouvert aux opportunités</p>
+    </div>
+    <div class="hero-visual">
+      <div class="code-block">
+        <div><span class="cm">// Développeur Full Stack</span></div>
+        <div><span class="kw">const</span> <span class="va">dev</span> <span class="op">=</span> {</div>
+        <div>&nbsp; <span class="va">name</span><span class="op">:</span> <span class="st">"Victor Rubia"</span>,</div>
+        <div>&nbsp; <span class="va">stack</span><span class="op">:</span> [<span class="st">"Next.js"</span>, <span class="st">"Django"</span>],</div>
+        <div>&nbsp; <span class="va">available</span><span class="op">:</span> <span class="kw">true</span>,</div>
+        <div>}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <div class="content-grid" id="projets">
+    <div class="section-rule">
+      <span class="rule-label">Projets sélectionnés</span>
+      <span class="rule-line"></span>
+    </div>
+    <div class="articles-grid">
+
+      <div class="article">
+        <p class="article-tag">Full Stack · Production</p>
+        <h2 class="article-title large">Brotia</h2>
+        <p class="article-excerpt">
+          Plateforme de gestion de serres agricoles. Suivi des cultures, météo temps réel par serre, alertes climatiques automatiques, assistant IA agronomique, companion mobile Expo. Architecture monorepo Turborepo.
+        </p>
+        <div class="article-tech">
+          <span class="tech-pill">Next.js</span>
+          <span class="tech-pill">Expo</span>
+          <span class="tech-pill">Claude AI</span>
+          <span class="tech-pill">PostgreSQL</span>
+          <span class="tech-pill">Turborepo</span>
+        </div>
+        <a href="https://brotia.vercel.app" target="_blank" rel="noopener" class="article-link">
+          Voir le projet →
+        </a>
+      </div>
+
+      <div class="article">
+        <p class="article-tag">Full Stack</p>
+        <h2 class="article-title">Camio</h2>
+        <p class="article-excerpt">
+          Gestion de chargement BTP. Documents imprimables, checklist mobile chauffeurs, statistiques par chantier.
+        </p>
+        <div class="article-tech">
+          <span class="tech-pill">Next.js</span>
+          <span class="tech-pill">Prisma</span>
+          <span class="tech-pill">shadcn/ui</span>
+        </div>
+        <a href="https://camio-xi.vercel.app" target="_blank" rel="noopener" class="article-link">
+          Voir →
+        </a>
+      </div>
+
+      <div class="article">
+        <p class="article-tag">AI / Agents</p>
+        <h2 class="article-title">LinkedAgents</h2>
+        <p class="article-excerpt">
+          6 agents Claude Code + orchestrateur. Posts, offres, articles, audit profil LinkedIn — tout automatisé.
+        </p>
+        <div class="article-tech">
+          <span class="tech-pill">Claude Code</span>
+          <span class="tech-pill">Shell</span>
+        </div>
+        <a href="https://github.com/Victor-R-R/LinkedAgents" target="_blank" rel="noopener" class="article-link">
+          GitHub →
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Second row -->
+    <div class="articles-grid" style="margin-top:0;border-top:1px solid var(--rule);">
+      <div class="article">
+        <p class="article-tag">AI · Education</p>
+        <h2 class="article-title large">TeachIA</h2>
+        <p class="article-excerpt">
+          Préparation au CAPES d'espagnol avec professeur IA. 82 exercices structurés, génération dynamique, chat streamé avec historique persistant. Disponible 24h/24.
+        </p>
+        <div class="article-tech">
+          <span class="tech-pill">AI SDK</span>
+          <span class="tech-pill">Claude</span>
+          <span class="tech-pill">Neon</span>
+          <span class="tech-pill">Next.js</span>
+        </div>
+        <a href="https://teach-ia.vercel.app" target="_blank" rel="noopener" class="article-link">
+          Voir le projet →
+        </a>
+      </div>
+      <div class="article">
+        <p class="article-tag">Full Stack</p>
+        <h2 class="article-title">Appel Internat</h2>
+        <p class="article-excerpt">
+          Application de gestion d'appels scolaires. Interface React, backend Django, notifications temps réel.
+        </p>
+        <div class="article-tech">
+          <span class="tech-pill">Next.js</span>
+          <span class="tech-pill">Django</span>
+          <span class="tech-pill">Python</span>
+        </div>
+        <a href="https://github.com/Victor-R-R/appel-internat" target="_blank" rel="noopener" class="article-link">
+          GitHub →
+        </a>
+      </div>
+      <div class="article">
+        <p class="article-tag">Backend</p>
+        <h2 class="article-title">Flight Scraper</h2>
+        <p class="article-excerpt">
+          Scraper de prix de vols, analyse automatique, détection des meilleures offres et alertes personnalisées.
+        </p>
+        <div class="article-tech">
+          <span class="tech-pill">Node.js</span>
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">TypeScript</span>
+        </div>
+        <a href="https://github.com/Victor-R-R/flight-price-scraper" target="_blank" rel="noopener" class="article-link">
+          GitHub →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stack -->
+  <div class="stack-strip" id="stack">
+    <div class="section-rule" style="margin-bottom:0;">
+      <span class="rule-label">Stack technique</span>
+      <span class="rule-line"></span>
+    </div>
+    <div class="stack-chips">
+      <div class="chip"><span class="chip-name">React</span></div>
+      <div class="chip"><span class="chip-name">Next.js</span></div>
+      <div class="chip"><span class="chip-name">TypeScript</span></div>
+      <div class="chip"><span class="chip-name">Python</span></div>
+      <div class="chip"><span class="chip-name">Django</span></div>
+      <div class="chip"><span class="chip-name">Node.js</span></div>
+      <div class="chip"><span class="chip-name">PostgreSQL</span></div>
+      <div class="chip"><span class="chip-name">Prisma</span></div>
+      <div class="chip"><span class="chip-name">Tailwind CSS</span></div>
+      <div class="chip"><span class="chip-name">shadcn/ui</span></div>
+      <div class="chip"><span class="chip-name">Vercel</span></div>
+      <div class="chip"><span class="chip-name">Claude AI</span></div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="contact-strip" id="contact">
+    <div class="contact-col">
+      <p class="contact-col-label">Email</p>
+      <a href="mailto:victor.r.r90@gmail.com" class="contact-col-value">victor.r.r90@gmail.com</a>
+    </div>
+    <div class="col-divider"></div>
+    <div class="contact-col">
+      <p class="contact-col-label">Téléphone</p>
+      <a href="tel:+330640300249" class="contact-col-value">+33 6 40 30 02 49</a>
+    </div>
+    <div class="col-divider"></div>
+    <div class="contact-col">
+      <p class="contact-col-label">GitHub</p>
+      <a href="https://github.com/Victor-R-R" target="_blank" rel="noopener" class="contact-col-value">Victor-R-R</a>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-text">© 2026 Victor Rubia Rodriguez · Développeur Full Stack · France</span>
+    <div class="footer-links">
+      <a href="https://github.com/Victor-R-R" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:victor.r.r90@gmail.com">Email</a>
+      <a href="/CV_Victor_Rubia_Rodriguez.pdf" download>CV</a>
+    </div>
+  </footer>
+
+</body>
+</html>

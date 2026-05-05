@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0A0A0A" id="metaTheme">
+  <title>Victor Rubia — Développeur Full Stack</title>
+  <!-- Anti-FOUC: set theme before first paint -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('theme') ||
+              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+      var m = document.getElementById('metaTheme');
+      if (m) m.content = t === 'light' ? '#F9F6F1' : '#0A0A0A';
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ── Dark (default) ── */
+    :root {
+      --bg:           #0A0A0A;
+      --surface:      #111111;
+      --surface-2:    #1A1A1A;
+      --border:       rgba(255,255,255,0.08);
+      --border-2:     rgba(255,255,255,0.14);
+      --text:         #FAFAFA;
+      --text-2:       #A1A1AA;
+      --text-3:       #52525B;
+      --amber:        #F59E0B;
+      --amber-dim:    rgba(245,158,11,0.10);
+      --amber-border: rgba(245,158,11,0.22);
+      --green:        #22C55E;
+      --font-serif:   'Instrument Serif', Georgia, serif;
+      --font-sans:    'Geist', -apple-system, system-ui, sans-serif;
+    }
+
+    /* ── Light overrides ── */
+    html[data-theme="light"] {
+      --bg:           #F9F6F1;
+      --surface:      #F2EDE5;
+      --surface-2:    #E8E1D6;
+      --border:       rgba(0,0,0,0.09);
+      --border-2:     rgba(0,0,0,0.15);
+      --text:         #1C1816;
+      --text-2:       #5C5148;
+      --text-3:       #9C8F84;
+      --amber:        #B45309;
+      --amber-dim:    rgba(180,83,9,0.07);
+      --amber-border: rgba(180,83,9,0.18);
+      --green:        #15803D;
+    }
+
+    /* ── Theme transition (only during toggle, not on load) ── */
+    html.theme-transition,
+    html.theme-transition *,
+    html.theme-transition *::before,
+    html.theme-transition *::after {
+      transition:
+        background-color 200ms ease,
+        color 200ms ease,
+        border-color 200ms ease,
+        box-shadow 200ms ease !important;
+      transition-delay: 0ms !important;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* Noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    html[data-theme="light"] body::before { opacity: 0.12; }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    html[data-theme="light"] nav {
+      background: rgba(249,246,241,0.90);
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 200ms;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* Theme toggle */
+    .theme-toggle {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-2);
+      transition: background 200ms, border-color 200ms, color 200ms;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle:hover {
+      background: var(--surface-2);
+      color: var(--text);
+    }
+
+    .theme-icon { display: block; }
+    html[data-theme="dark"]  .icon-moon { display: none; }
+    html[data-theme="light"] .icon-sun  { display: none; }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 14px;
+      background: var(--amber-dim);
+      border: 1px solid var(--amber-border);
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--amber);
+      text-decoration: none;
+      transition: background 200ms, border-color 200ms;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover {
+      background: rgba(245,158,11,0.18);
+      border-color: rgba(245,158,11,0.38);
+    }
+
+    html[data-theme="light"] .nav-cta:hover {
+      background: rgba(180,83,9,0.14);
+      border-color: rgba(180,83,9,0.30);
+    }
+
+    /* ── Main ── */
+    main { max-width: 960px; margin: 0 auto; padding: 0 48px; position: relative; z-index: 1; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 100px 0 80px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-kicker {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .hero-kicker-line {
+      width: 40px;
+      height: 1px;
+      background: var(--amber);
+      flex-shrink: 0;
+    }
+
+    .hero-kicker-text {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+
+    .hero-name {
+      font-family: var(--font-serif);
+      font-size: clamp(64px, 9vw, 104px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: -1px;
+      margin-bottom: 36px;
+    }
+
+    .hero-name .first { display: block; color: var(--text); }
+    .hero-name .last  { display: block; color: var(--amber); font-style: italic; }
+
+    .hero-desc {
+      max-width: 500px;
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--text-2);
+      line-height: 1.75;
+      margin-bottom: 56px;
+    }
+
+    .hero-stats { display: flex; gap: 48px; }
+
+    .stat-num {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.5px;
+      display: block;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    /* ── Section ── */
+    .section {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Project List ── */
+    .project-list { display: flex; flex-direction: column; }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: 44px 1fr auto;
+      align-items: start;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .project-item:last-child { border-bottom: none; }
+    .project-item:hover .project-title { color: var(--amber); }
+
+    .project-num {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-3);
+      padding-top: 4px;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.04em;
+    }
+
+    .project-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 8px;
+      transition: color 200ms;
+      letter-spacing: -0.2px;
+      line-height: 1.2;
+    }
+
+    .project-desc {
+      font-size: 14px;
+      color: var(--text-2);
+      font-weight: 300;
+      line-height: 1.65;
+      max-width: 520px;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+      padding-top: 4px;
+    }
+
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text-3);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      border-radius: 3px;
+      letter-spacing: 0.02em;
+    }
+
+    .project-arrow {
+      color: var(--text-3);
+      transition: color 200ms, transform 200ms;
+    }
+
+    .project-item:hover .project-arrow {
+      color: var(--amber);
+      transform: translateX(4px);
+    }
+
+    .type-badge {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+
+    /* Dark badge colors */
+    .type-fs { background: rgba(245,158,11,0.10); color: #F59E0B; border: 1px solid rgba(245,158,11,0.22); }
+    .type-be { background: rgba(34,197,94,0.09);  color: #4ADE80; border: 1px solid rgba(34,197,94,0.22); }
+    .type-fe { background: rgba(99,102,241,0.09); color: #A5B4FC; border: 1px solid rgba(99,102,241,0.22); }
+    .type-ai { background: rgba(244,114,182,0.09);color: #F9A8D4; border: 1px solid rgba(244,114,182,0.22); }
+
+    /* Light badge colors — readable on cream bg */
+    html[data-theme="light"] .type-fs { background: rgba(180,83,9,0.08);  color: #92400E; border-color: rgba(180,83,9,0.20); }
+    html[data-theme="light"] .type-be { background: rgba(21,128,61,0.08); color: #15803D; border-color: rgba(21,128,61,0.20); }
+    html[data-theme="light"] .type-fe { background: rgba(67,56,202,0.08); color: #4338CA; border-color: rgba(67,56,202,0.20); }
+    html[data-theme="light"] .type-ai { background: rgba(157,23,77,0.08); color: #9D174D; border-color: rgba(157,23,77,0.20); }
+
+    /* ── Stack ── */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+
+    .stack-item {
+      position: relative;
+      padding: 28px 12px 22px;
+      background: var(--surface);
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: border-color 250ms ease, box-shadow 250ms ease;
+      cursor: default;
+    }
+
+    /* Spotlight from top on hover */
+    .stack-item::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 0; right: 0;
+      height: 60%;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(245,158,11,0.14) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 250ms ease;
+      pointer-events: none;
+    }
+
+    .stack-item:hover {
+      border-color: rgba(245,158,11,0.32);
+      box-shadow: 0 0 0 1px rgba(245,158,11,0.10) inset, 0 4px 24px rgba(245,158,11,0.06);
+    }
+
+    .stack-item:hover::before { opacity: 1; }
+
+    .stack-logo {
+      display: block;
+      width: 28px;
+      height: 28px;
+      margin: 0 auto 12px;
+      /* Force icons to match theme */
+      filter: brightness(0) invert(1) opacity(0.55);
+      transition: filter 250ms, opacity 250ms;
+    }
+
+    html[data-theme="light"] .stack-logo {
+      filter: brightness(0) opacity(0.45);
+    }
+
+    .stack-item:hover .stack-logo {
+      filter: brightness(0) invert(1) opacity(0.9);
+    }
+
+    html[data-theme="light"] .stack-item:hover .stack-logo {
+      filter: brightness(0) opacity(0.8);
+    }
+
+    .stack-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-2);
+      display: block;
+      position: relative;
+      transition: color 250ms;
+      letter-spacing: 0.01em;
+    }
+
+    .stack-item:hover .stack-name { color: var(--amber); }
+
+    /* ── Contact ── */
+    .contact-block { display: flex; flex-direction: column; }
+
+    .contact-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-line:last-child { border-bottom: none; }
+
+    .contact-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      min-width: 120px;
+    }
+
+    .contact-value {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 200ms;
+    }
+
+    a.contact-value:hover { color: var(--amber); }
+
+    .contact-available {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--green);
+      font-weight: 400;
+    }
+
+    .available-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2.5s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    /* ── Footer ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 28px 48px;
+      border-top: 1px solid var(--border);
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy { font-size: 13px; color: var(--text-3); }
+
+    .footer-links { display: flex; gap: 24px; }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 200ms;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+    }
+
+    .about-text {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-2);
+      line-height: 1.85;
+    }
+
+    .about-text p + p { margin-top: 16px; }
+
+    .about-em {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .timeline { display: flex; flex-direction: column; }
+
+    .timeline-item {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timeline-item:first-child { padding-top: 0; }
+    .timeline-item:last-child  { border-bottom: none; }
+
+    .timeline-period {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 4px;
+    }
+
+    .timeline-role {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .timeline-org {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-2);
+    }
+
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    /* ── Hero links ── */
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 40px;
+    }
+
+    .hero-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 16px;
+      border: 1px solid var(--border-2);
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: border-color 200ms, color 200ms, background 200ms;
+    }
+
+    .hero-link:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+      background: var(--amber-dim);
+    }
+
+    .hero-link svg { flex-shrink: 0; }
+
+    /* Download variant */
+    .hero-link-dl {
+      border-style: dashed;
+    }
+
+    /* ── Contact download row ── */
+    .contact-doc {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-doc:last-child { border-bottom: none; }
+
+    .doc-dl {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 200ms;
+      border: 1px dashed var(--border-2);
+      border-radius: 5px;
+      padding: 6px 12px;
+    }
+
+    .doc-dl:hover { color: var(--amber); border-color: var(--amber-border); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      main, footer { padding-left: 24px; padding-right: 24px; }
+      .hero { padding: 64px 0 56px; }
+      .project-item { grid-template-columns: 36px 1fr; }
+      .project-meta { display: none; }
+      .hero-stats { gap: 32px; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="nav-logo">VR</a>
+    <ul class="nav-links">
+      <li><a href="#work">Projets</a></li>
+      <li><a href="#stack">Stack</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">
+        <!-- Sun -->
+        <svg class="theme-icon icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        </svg>
+        <!-- Moon -->
+        <svg class="theme-icon icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      <a href="mailto:victor.r.r90@gmail.com" class="nav-cta">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        Me contacter
+      </a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-kicker">
+        <span class="hero-kicker-line"></span>
+        <span class="hero-kicker-text">Développeur Full Stack</span>
+      </div>
+      <h1 class="hero-name">
+        <span class="first">Victor</span>
+        <span class="last">Rubia</span>
+      </h1>
+      <p class="hero-desc">
+        Dev autodidacte, fondateur d'Appel Internat — un SaaS EdTech
+        déployé en production sur 380+ élèves. Je construis des produits
+        complets de l'API jusqu'à l'interface, avec un goût pour les
+        architectures claires et le code qui tient en production.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">7</span>
+          <span class="stat-label">Projets</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">3+</span>
+          <span class="stat-label">Années</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">8</span>
+          <span class="stat-label">Technologies</span>
+        </div>
+      </div>
+
+      <div class="hero-links">
+        <a href="https://github.com/Victor-R-R" target="_blank" rel="noopener" class="hero-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/victor-rubia-rodriguez" target="_blank" rel="noopener" class="hero-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="/CV_Victor_Rubia_Rodriguez.pdf" download class="hero-link hero-link-dl">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          CV
+        </a>
+        <a href="/recommandation-victor-rubia-rodriguez.pdf" download class="hero-link hero-link-dl">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Lettre de recommandation
+        </a>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section">
+      <p class="section-label">À propos</p>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            <span class="about-em">Développeur autodidacte</span>, j'ai commencé à coder en 2023 avec Python, puis basculé sur le web full-stack. Mon moteur : construire des choses qui résolvent de vrais problèmes.
+          </p>
+          <p>
+            En tant qu'<span class="about-em">AED à l'Internat d'Excellence de Sourdun</span>, j'ai constaté que la gestion des appels du soir se faisait encore sur papier. J'ai construit la solution de A à Z — Appel Internat est aujourd'hui <span class="about-em">un SaaS en production sur 380+ élèves</span>.
+          </p>
+          <p>
+            Chez <span class="about-em">Méthode Aristote</span>, j'ai contribué à une stack TypeScript avancée — tRPC, Playwright, CI/CD — ce qui m'a formé à la rigueur du code en environnement de production réel.
+          </p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="timeline-period">Févr. 2026 — aujourd'hui</span>
+            <span class="timeline-role">Fondateur & Développeur Full-Stack</span>
+            <span class="timeline-org">Appel-Internat · Indépendant</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-period">Nov. 2025 — Févr. 2026</span>
+            <span class="timeline-role">Développeur Full-Stack & QA</span>
+            <span class="timeline-org">Méthode Aristote · Freelance</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-period">Sept. 2024 — aujourd'hui</span>
+            <span class="timeline-role">Assistant d'éducation (AED)</span>
+            <span class="timeline-org">Internat d'Excellence de Sourdun</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work -->
+    <section id="work" class="section">
+      <p class="section-label">Projets sélectionnés</p>
+      <div class="project-list">
+
+        <a class="project-item" href="https://appel-internat.vercel.app" target="_blank" rel="noopener noreferrer">
+          <span class="project-num">01</span>
+          <div class="project-body">
+            <h3 class="project-title">Appel Internat</h3>
+            <p class="project-desc">SaaS mobile-first de gestion des présences pour internats scolaires. Appel du soir, export PDF automatique, messagerie interne, notifications push, PWA. En production sur 380+ élèves.</p>
+          </div>
+          <div class="project-meta">
+            <span class="type-badge type-fs">Full Stack</span>
+            <div class="project-tags">
+              <span class="tag">Next.js</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Prisma</span>
+              <span class="tag">Pusher</span>
+              <span class="tag">Tailwind CSS</span>
+            </div>
+            <svg class="project-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </a>
+
+        <a class="project-item" href="https://camio-xi.vercel.app/login" target="_blank" rel="noopener noreferrer">
+          <span class="project-num">02</span>
+          <div class="project-body">
+            <h3 class="project-title">Camio</h3>
+            <p class="project-desc">Gestion des listes de chargement pour entreprises BTP. Génération de 3 documents imprimables, checklist mobile chauffeurs (sans auth), statistiques de consommation par chantier.</p>
+          </div>
+          <div class="project-meta">
+            <span class="type-badge type-fs">Full Stack</span>
+            <div class="project-tags">
+              <span class="tag">Next.js</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Prisma</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">shadcn/ui</span>
+            </div>
+            <svg class="project-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </a>
+
+        <a class="project-item" href="https://teach-ia.vercel.app" target="_blank" rel="noopener noreferrer">
+          <span class="project-num">03</span>
+          <div class="project-body">
+            <h3 class="project-title">TeachIA</h3>
+            <p class="project-desc">Plateforme de préparation au CAPES d'espagnol avec professeur IA disponible 24h/24. QCM, lacunes, vrai/faux, génération d'exercices par IA, chat streamé avec historique persistant.</p>
+          </div>
+          <div class="project-meta">
+            <span class="type-badge type-ai">AI</span>
+            <div class="project-tags">
+              <span class="tag">Next.js</span>
+              <span class="tag">AI SDK</span>
+              <span class="tag">Anthropic</span>
+              <span class="tag">Neon</span>
+              <span class="tag">shadcn/ui</span>
+            </div>
+            <svg class="project-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </a>
+
+        <a class="project-item" href="https://brotia.vercel.app" target="_blank" rel="noopener noreferrer">
+          <span class="project-num">04</span>
+          <div class="project-body">
+            <h3 class="project-title">Brotia</h3>
+            <p class="project-desc">Plateforme de gestion de serres agricoles. Suivi des cultures, météo temps réel, alertes climatiques, assistant IA agronomique avec upload d'images, app mobile Expo. Monorepo Turborepo.</p>
+          </div>
+          <div class="project-meta">
+            <span class="type-badge type-fs">Full Stack</span>
+            <div class="project-tags">
+              <span class="tag">Next.js</span>
+              <span class="tag">Expo</span>
+              <span class="tag">MapLibre GL</span>
+              <span class="tag">Prisma / Neon</span>
+              <span class="tag">Turborepo</span>
+            </div>
+            <svg class="project-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </a>
+
+        <a class="project-item" href="https://github.com/Victor-R-R/LinkedAgents" target="_blank" rel="noopener noreferrer">
+          <span class="project-num">05</span>
+          <div class="project-body">
+            <h3 class="project-title">LinkedAgents</h3>
+            <p class="project-desc">Suite de 7 agents Claude Code spécialisés + 1 orchestrateur pour gérer sa présence LinkedIn. Posts, articles, offres d'emploi, messagerie, visuels, audit de profil — installable en une commande.</p>
+          </div>
+          <div class="project-meta">
+            <span class="type-badge type-ai">AI / Agents</span>
+            <div class="project-tags">
+              <span class="tag">Claude Code</span>
+              <span class="tag">Shell</span>
+              <span class="tag">Python</span>
+              <span class="tag">LinkedIn MCP</span>
+            </div>
+            <svg class="project-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Stack -->
+    <section id="stack" class="section">
+      <p class="section-label">Technologies</p>
+      <div class="stack-grid">
+        <div class="stack-item">
+          <img class="stack-logo" src="https://cdn.simpleicons.org/nextdotjs" width="28" height="28" alt="">
+          <span class="stack-name">Next.js</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-logo" src="https://cdn.simpleicons.org/typescript" width="28" height="28" alt="">
+          <span class="stack-name">TypeScript</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-logo" src="https://cdn.simpleicons.org/react" width="28" height="28" alt="">
+          <span class="stack-name">React</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-logo" src="https://cdn.simpleicons.org/prisma" width="28" height="28" alt="">
+          <span class="stack-name">Prisma</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-logo" src="https://cdn.simpleicons.org/postgresql" width="28" height="28" alt="">
+          <span class="stack-name">PostgreSQL</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-logo" src="https://cdn.simpleicons.org/tailwindcss" width="28" height="28" alt="">
+          <span class="stack-name">Tailwind CSS</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-logo" src="https://cdn.simpleicons.org/anthropic" width="28" height="28" alt="">
+          <span class="stack-name">Claude AI</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-logo" src="https://cdn.simpleicons.org/expo" width="28" height="28" alt="">
+          <span class="stack-name">Expo</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-logo" src="https://cdn.simpleicons.org/playwright" width="28" height="28" alt="">
+          <span class="stack-name">Playwright</span>
+        </div>
+        <div class="stack-item">
+          <img class="stack-logo" src="https://cdn.simpleicons.org/shadcnui" width="28" height="28" alt="">
+          <span class="stack-name">shadcn/ui</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <p class="section-label">Contact</p>
+      <div class="contact-block">
+        <div class="contact-line">
+          <span class="contact-label">Email</span>
+          <a href="mailto:victor.r.r90@gmail.com" class="contact-value">victor.r.r90@gmail.com</a>
+        </div>
+        <div class="contact-line">
+          <span class="contact-label">Téléphone</span>
+          <a href="tel:+330640300249" class="contact-value">+33 6 40 30 02 49</a>
+        </div>
+        <div class="contact-line">
+          <span class="contact-label">GitHub</span>
+          <a href="https://github.com/Victor-R-R" target="_blank" rel="noopener" class="contact-value">github.com/Victor-R-R</a>
+        </div>
+        <div class="contact-line">
+          <span class="contact-label">LinkedIn</span>
+          <a href="https://linkedin.com/in/victor-rubia-rodriguez" target="_blank" rel="noopener" class="contact-value">linkedin.com/in/victor-rubia-rodriguez</a>
+        </div>
+        <div class="contact-line">
+          <span class="contact-label">Localisation</span>
+          <span class="contact-value">France</span>
+        </div>
+        <div class="contact-line">
+          <span class="contact-label">Disponibilité</span>
+          <span class="contact-value contact-available">
+            <span class="available-dot"></span>
+            Ouvert aux opportunités
+          </span>
+        </div>
+        <div class="contact-doc">
+          <span class="contact-label">Documents</span>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;">
+            <a href="/CV_Victor_Rubia_Rodriguez.pdf" download class="doc-dl">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              CV
+            </a>
+            <a href="/recommandation-victor-rubia-rodriguez.pdf" download class="doc-dl">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              Recommandation
+            </a>
+            <a href="/Lettre_Motivation_Victor_Rubia_Rodriguez.pdf" download class="doc-dl">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+              Lettre de motivation
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span class="footer-copy">© 2026 Victor Rubia Rodriguez</span>
+    <div class="footer-links">
+      <a href="https://github.com/Victor-R-R" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/victor-rubia-rodriguez" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:victor.r.r90@gmail.com">Email</a>
+    </div>
+  </footer>
+
+  <script>
+    const btn  = document.getElementById('themeToggle');
+    const meta = document.getElementById('metaTheme');
+
+    btn.addEventListener('click', () => {
+      document.documentElement.classList.add('theme-transition');
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      if (meta) meta.content = next === 'light' ? '#F9F6F1' : '#0A0A0A';
+      setTimeout(() => document.documentElement.classList.remove('theme-transition'), 300);
+    });
+  </script>
+
+</body>
+</html>
