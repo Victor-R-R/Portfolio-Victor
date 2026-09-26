@@ -1,0 +1,17 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Rubia Rodriguez;Victor;;;
+FN:Victor Rubia Rodriguez
+TITLE:Développeur Full Stack & IA
+TEL;TYPE=CELL,VOICE:+33640300249
+EMAIL;TYPE=INTERNET,PREF:victor.r.r90@gmail.com
+ADR;TYPE=WORK:;;;;;;France
+URL:https://portfolio-victor-psi.vercel.app
+X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/victor-rubia-rodriguez/
+X-SOCIALPROFILE;TYPE=github:https://github.com/Victor-R-R
+item1.URL:https://www.linkedin.com/in/victor-rubia-rodriguez/
+item1.X-ABLabel:LinkedIn
+item2.URL:https://github.com/Victor-R-R
+item2.X-ABLabel:GitHub
+NOTE:Développeur Full Stack & IA · Next.js\, TypeScript\, Prisma
+END:VCARD
