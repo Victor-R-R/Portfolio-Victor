@@ -1,0 +1,2 @@
+# vCard spec requires CRLF, store byte-for-byte
+*.vcf -text
