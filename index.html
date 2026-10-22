@@ -510,7 +510,20 @@
     }
 
     .stack-logo { filter: grayscale(30%); opacity: 0.85; }
+    .stack-logo--mono { filter: brightness(0) invert(1); opacity: 0.8; }
     html[data-theme="light"] .stack-logo { filter: none; }
+
+    .stack-group + .stack-group { margin-top: 28px; }
+
+    .stack-group-title {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin: 0 0 12px;
+    }
 
     .stack-name {
       font-family: var(--font-mono);
@@ -971,66 +984,161 @@
         <span class="section-title">Technologies</span>
       </div>
 
-      <div class="stack-grid">
-        <div class="stack-item">
-          <img class="stack-logo" src="https://cdn.simpleicons.org/nextdotjs" width="28" height="28" alt="">
-          <span class="stack-name">Next.js</span>
+      <div class="stack-group">
+        <h3 class="stack-group-title">Frontend &amp; mobile</h3>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <img class="stack-logo stack-logo--mono" src="https://cdn.simpleicons.org/nextdotjs" width="28" height="28" alt="">
+            <span class="stack-name">Next.js</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/typescript" width="28" height="28" alt="">
+            <span class="stack-name">TypeScript</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/react" width="28" height="28" alt="">
+            <span class="stack-name">React</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/tailwindcss" width="28" height="28" alt="">
+            <span class="stack-name">Tailwind CSS</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo stack-logo--mono" src="https://cdn.simpleicons.org/shadcnui" width="28" height="28" alt="">
+            <span class="stack-name">shadcn/ui</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo stack-logo--mono" src="https://cdn.simpleicons.org/expo" width="28" height="28" alt="">
+            <span class="stack-name">Expo</span>
+          </div>
         </div>
-        <div class="stack-item">
-          <img class="stack-logo" src="https://cdn.simpleicons.org/typescript" width="28" height="28" alt="">
-          <span class="stack-name">TypeScript</span>
+      </div>
+      <div class="stack-group">
+        <h3 class="stack-group-title">Backend &amp; données</h3>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <img class="stack-logo stack-logo--mono" src="https://cdn.simpleicons.org/prisma" width="28" height="28" alt="">
+            <span class="stack-name">Prisma</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/trpc" width="28" height="28" alt="">
+            <span class="stack-name">tRPC</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/postgresql" width="28" height="28" alt="">
+            <span class="stack-name">PostgreSQL</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/supabase" width="28" height="28" alt="">
+            <span class="stack-name">Supabase</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/neon" width="28" height="28" alt="">
+            <span class="stack-name">Neon</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/upstash" width="28" height="28" alt="">
+            <span class="stack-name">Upstash Redis</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/clerk" width="28" height="28" alt="">
+            <span class="stack-name">Clerk</span>
+          </div>
         </div>
-        <div class="stack-item">
-          <img class="stack-logo" src="https://cdn.simpleicons.org/react" width="28" height="28" alt="">
-          <span class="stack-name">React</span>
+      </div>
+      <div class="stack-group">
+        <h3 class="stack-group-title">IA</h3>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <img class="stack-logo stack-logo--mono" src="https://cdn.simpleicons.org/anthropic" width="28" height="28" alt="">
+            <span class="stack-name">Claude AI</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/claude" width="28" height="28" alt="">
+            <span class="stack-name">Claude Code</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo stack-logo--mono" src="https://cdn.simpleicons.org/vercel" width="28" height="28" alt="">
+            <span class="stack-name">AI SDK</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/googlegemini" width="28" height="28" alt="">
+            <span class="stack-name">Gemini</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/mistralai" width="28" height="28" alt="">
+            <span class="stack-name">Mistral AI</span>
+          </div>
         </div>
-        <div class="stack-item">
-          <img class="stack-logo" src="https://cdn.simpleicons.org/prisma" width="28" height="28" alt="">
-          <span class="stack-name">Prisma</span>
+      </div>
+      <div class="stack-group">
+        <h3 class="stack-group-title">Services</h3>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <img class="stack-logo stack-logo--mono" src="https://cdn.simpleicons.org/pusher" width="28" height="28" alt="">
+            <span class="stack-name">Pusher</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo stack-logo--mono" src="https://cdn.simpleicons.org/resend" width="28" height="28" alt="">
+            <span class="stack-name">Resend</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/brevo" width="28" height="28" alt="">
+            <span class="stack-name">Brevo</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo stack-logo--mono" src="https://cdn.simpleicons.org/sentry" width="28" height="28" alt="">
+            <span class="stack-name">Sentry</span>
+          </div>
         </div>
-        <div class="stack-item">
-          <img class="stack-logo" src="https://cdn.simpleicons.org/trpc" width="28" height="28" alt="">
-          <span class="stack-name">tRPC</span>
-        </div>
-        <div class="stack-item">
-          <img class="stack-logo" src="https://cdn.simpleicons.org/postgresql" width="28" height="28" alt="">
-          <span class="stack-name">PostgreSQL</span>
-        </div>
-        <div class="stack-item">
-          <img class="stack-logo" src="https://cdn.simpleicons.org/tailwindcss" width="28" height="28" alt="">
-          <span class="stack-name">Tailwind CSS</span>
-        </div>
-        <div class="stack-item">
-          <img class="stack-logo" src="https://cdn.simpleicons.org/anthropic" width="28" height="28" alt="">
-          <span class="stack-name">Claude AI</span>
-        </div>
-        <div class="stack-item">
-          <img class="stack-logo" src="https://cdn.simpleicons.org/vercel" width="28" height="28" alt="">
-          <span class="stack-name">AI SDK</span>
-        </div>
-        <div class="stack-item">
-          <img class="stack-logo" src="https://cdn.simpleicons.org/expo" width="28" height="28" alt="">
-          <span class="stack-name">Expo</span>
-        </div>
-        <div class="stack-item">
-          <img class="stack-logo" src="https://cdn.simpleicons.org/turborepo" width="28" height="28" alt="">
-          <span class="stack-name">Turborepo</span>
-        </div>
-        <div class="stack-item">
-          <img class="stack-logo" src="https://cdn.simpleicons.org/vitest" width="28" height="28" alt="">
-          <span class="stack-name">Vitest</span>
-        </div>
-        <div class="stack-item">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="12" cy="5.5" r="4.2" fill="#2EAD33"/>
-            <circle cx="5.2" cy="17.5" r="4.2" fill="#E2574C"/>
-            <circle cx="18.8" cy="17.5" r="4.2" fill="#7B5EA7"/>
-          </svg>
-          <span class="stack-name">Playwright</span>
-        </div>
-        <div class="stack-item">
-          <img class="stack-logo" src="https://cdn.simpleicons.org/shadcnui" width="28" height="28" alt="">
-          <span class="stack-name">shadcn/ui</span>
+      </div>
+      <div class="stack-group">
+        <h3 class="stack-group-title">DevOps &amp; qualité</h3>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/git" width="28" height="28" alt="">
+            <span class="stack-name">Git</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo stack-logo--mono" src="https://cdn.simpleicons.org/github" width="28" height="28" alt="">
+            <span class="stack-name">GitHub</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/githubactions" width="28" height="28" alt="">
+            <span class="stack-name">GitHub Actions</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo stack-logo--mono" src="https://cdn.simpleicons.org/vercel" width="28" height="28" alt="">
+            <span class="stack-name">Vercel</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/turborepo" width="28" height="28" alt="">
+            <span class="stack-name">Turborepo</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/dependabot" width="28" height="28" alt="">
+            <span class="stack-name">Dependabot</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/eslint" width="28" height="28" alt="">
+            <span class="stack-name">ESLint</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/prettier" width="28" height="28" alt="">
+            <span class="stack-name">Prettier</span>
+          </div>
+          <div class="stack-item">
+            <img class="stack-logo" src="https://cdn.simpleicons.org/vitest" width="28" height="28" alt="">
+            <span class="stack-name">Vitest</span>
+          </div>
+          <div class="stack-item">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="12" cy="5.5" r="4.2" fill="#2EAD33"/>
+              <circle cx="5.2" cy="17.5" r="4.2" fill="#E2574C"/>
+              <circle cx="18.8" cy="17.5" r="4.2" fill="#7B5EA7"/>
+            </svg>
+            <span class="stack-name">Playwright</span>
+          </div>
         </div>
       </div>
     </section>
